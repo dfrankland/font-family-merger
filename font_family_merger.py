@@ -5,23 +5,23 @@ from bs4 import BeautifulSoup
 from bs4 import NavigableString
 
 def parseFont(file):
-        with open(file, 'r+') as fileOpen:
-            data = fileOpen.read()
-            fileOpen.close()
-        soup = BeautifulSoup(data,'xml')
-        for name in soup.findAll('namerecord'):
-            nameAttrs = dict(name.attrs)
-            if nameAttrs[u'nameID'] == "1":
-                print "------------->" + name.string
-                names = name.string.lstrip().split(" ",1)
-                print "------------->" + names[0]
-                name.string.replace_with(names[0])
-            if nameAttrs[u'nameID'] == "2":
-                print "------------->" + names[1]
-                name.string.replace_with(names[1])
-        data = soup.prettify("utf-8")
-        with open(file, 'w') as fileClose:
-            fileClose.write(data)
+    with open(file, 'r+') as fileOpen:
+        data = fileOpen.read()
+        fileOpen.close()
+    soup = BeautifulSoup(data,'xml')
+    for name in soup.findAll('namerecord'):
+        nameAttrs = dict(name.attrs)
+        if nameAttrs[u'nameID'] == "1":
+            names = name.string.lstrip().split(" ",1)
+            name.string.replace_with(names[0])
+        if nameAttrs[u'nameID'] == "2":
+            name.string.replace_with(names[1])
+    newFileName = names[0] + "-" + names[1].rstrip() + ".ttf"
+    data = soup.prettify("utf-8")
+    with open(file, 'w') as fileClose:
+        fileClose.write(data)
+    os.renames(file, newFileName)
+    return newFileName
 
 def getFiles():
     return [file for file in os.listdir('.') if os.path.isfile(file)]
@@ -34,7 +34,8 @@ if __name__ == "__main__":
     ttx.main(ttfFiles)
     for file in getFiles():
         if file.endswith(".ttx"):
-            parseFont(file)
-            ttxFiles.append(file)
+            ttxFiles.append(parseFont(file))
     ttx.main(ttxFiles)
-    #delete all ttx
+    for file in getFiles():
+        if file.endswith(".ttx"):
+            os.remove(file)
