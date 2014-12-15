@@ -16,7 +16,7 @@ def parseFont(file):
             name.string.replace_with(names[0])
         if nameAttrs[u'nameID'] == "2":
             name.string.replace_with(names[1])
-    newFileName = names[0] + "-" + names[1].rstrip() + ".ttf"
+    newFileName = names[0] + "-" + names[1].rstrip() + ".ttx"
     data = soup.prettify("utf-8")
     with open(file, 'w') as fileClose:
         fileClose.write(data)
