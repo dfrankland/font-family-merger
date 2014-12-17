@@ -9,11 +9,12 @@
         <p>Font Family Merger assumes that each of your fonts has a font name like <i>"Font FontVariation"</i> which it will take and make the font family and rename your files. <i>If your fonts do not follow this pattern, changes to the code will be neccesary in order for it to work properly.</i></p>
     </li>
     <li>
-        <p>Font Family Merger requires you to have <code>python</code> and also <code>BeautifulSoup</code> plus <code>fontTools</code> python modules installed as a prereqisite. For more information on that see below:</p>
+        <p>Font Family Merger requires you to have <code>python</code> and also <code>BeautifulSoup</code>, <code>lxml</code>, plus <code>fontTools</code> python modules installed as a prereqisite. For more information on that see below:</p>
         <ul>
             <li><a href="https://www.python.org/">Python</a></li>
             <li><a href="http://www.crummy.com/software/BeautifulSoup/">BeautifulSoup</a></li>
-            <li><a href="https://github.com/behdad/fonttools">FontTools</a></li>
+            <li><a href="https://github.com/lxml/lxml/">lxml</a></li>
+            <li><a href="https://github.com/behdad/fonttools/">FontTools</a></li>
         </ul>
     </li>
 </ol>
