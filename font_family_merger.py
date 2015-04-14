@@ -14,7 +14,7 @@ from bs4 import NavigableString
 
 def changeFont(files):
     for file in files:
-        print "Begin processing: " + file
+        print "Begin processing:   " + file
 
         # Get data from xml file and close it
         with open(file, 'r+') as fileOpen:
@@ -23,6 +23,8 @@ def changeFont(files):
 
         # Parse xml data with BeautifulSoup
         soup = BeautifulSoup(data,'xml')
+
+        #Initialize names list
         names = []
 
         #Main platformIDs and nameIDs to check for
@@ -47,21 +49,30 @@ def changeFont(files):
                 nameID[nameAttrs[u'platformID']][nameAttrs[u'nameID']] = True
                 # Set the names of the file if they exist and aren't set
                 if name.string and not name.string.isspace() and not names:
-                    print "This is the name to regex: " + name.string.strip(' \t\n\r')
+                    print "Name to regex:      " + name.string.strip(' \t\n\r')
                     # However you want to seperate the font family from
                     # its variation, insert that regex here
-                    regex = ""
-                    repeat = 1
+                    if not 'regex' in locals():
+                        regex = raw_input('Enter your regex:   ')
+                        regex = regex or ""
+                    if not 'repeat' in locals():
+                        repeat = raw_input('Regex repetion [1]: ')
+                        repeat = repeat or 1
                     names = name.string.strip(' \t\n\r').split(regex,repeat)
+
                     # Sometimes the normal fonts have no variation name
                     if len(names) == 1:
                         names.append("Regular")
-                    elif names[1].isspace():
+                    elif names[1].isspace() or not names[1]:
                         names[1] = "Regular"
 
+                    # Strip extra whitespace from both font family and variation
+                    names[0] = str(regex).strip(' \t\n\r')
+                    names[1] = names[1].strip(' \t\n\r')
+
         # Print the new names
-        print "This will be the font family: " + names[0]
-        print "This will be the font variation: " + names[1]
+        print "New font family:    " + names[0]
+        print "New font variation: " + names[1]
 
         # Check if the main nameIDs are missing
         for ID, platform in nameID.iteritems():
