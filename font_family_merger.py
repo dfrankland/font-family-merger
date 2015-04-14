@@ -49,10 +49,9 @@ def changeFont(files):
                 nameID[nameAttrs[u'platformID']][nameAttrs[u'nameID']] = True
                 # Set the names of the file if they exist and aren't set
                 if name.string and not name.string.isspace() and not names:
-                    print "Name to regex:      " + name.string.strip(' \t\n\r')
-                    # However you want to seperate the font family from
-                    # its variation, insert that regex here
+                    # User will input the regex to split the strings
                     if not 'regex' in locals():
+                        print "Name to regex:      " + name.string.strip(' \t\n\r')
                         regex = raw_input('Enter your regex:   ')
                         regex = regex or ""
                     if not 'repeat' in locals():
