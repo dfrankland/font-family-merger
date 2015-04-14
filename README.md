@@ -7,7 +7,7 @@
 <ol>
     <li><strong>TTF is the only supported font!</strong></li>
     <li>
-        <p>Font Family Merger assumes that each of your fonts has a font name like <i>"Font FontVariation"</i> which it will take and make the font family and rename your files. <i>If your fonts do not follow this pattern, changes to the code will be neccesary in order for it to work properly.</i></p>
+        <p>Font Family Merger tries to find each of your fonts names like <i>"Font FontVariation"</i> and split them into an array following the regex you provide. <i>If no names are found then Font Family Merger will throw an exception.</i></p>
     </li>
     <li>
         <p>Font Family Merger requires you to have <code>python</code> and also <code>BeautifulSoup</code>, <code>lxml</code>, plus <code>fontTools</code> python modules installed as a prereqisite. For more information on that see below:</p>
@@ -25,5 +25,6 @@
     <li><p>Drop <code>font_family_merger.py</code> in the directory that contains <strong>only</strong> the font you want to merge</p></li>
     <li><p>In terminal <code>cd</code> to your directory containing your font files and <code>font_family_merger.py</code></p></li>
     <li><p>Run the command <code>python font_family_merger.py</code></p></li>
+    <li><p>Wait to be prompted for the regex to split the names inside your fonts</p></li>
     <li><p><i>Watch the magic happen!</i></p></li>
 </ol>
