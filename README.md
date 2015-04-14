@@ -1,6 +1,7 @@
 <h1>Font Family Merger</h1>
 <i>Merge font variations together to make a big, happy, font family!</i>
 <p>Have you ever gotten a brand new, shiny, awesome font, but were taken agahst once it was loaded into your editing program? <i>Your precious new font was seperated by variations in a list of endless other fonts! This really sucks</i>, and there seems to be next to nothing out there for solutions to this (I am looking at you FontForge, GlyphsApp, etc.) &mdash; until now!</p>
+<p><strong>UPDATE:</strong> <i>Font Family Merger will also try to fix your font files' names if they are broken too!</i></p>
 
 <h2>Prerequisites</h2>
 <ol>
