@@ -5,7 +5,7 @@
 
 <h2>Prerequisites</h2>
 <ol>
-    <li><strong>TTF is the only supported font!</strong></li>
+    <li><strong>TTF and OTF are the only supported fonts!</strong></li>
     <li>
         <p>Font Family Merger tries to find each of your fonts names like <i>"Font FontVariation"</i> and split them into an array following the regex you provide. <i>If no names are found then Font Family Merger will throw an exception.</i></p>
     </li>
