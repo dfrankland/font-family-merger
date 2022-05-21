@@ -18,17 +18,17 @@ def decide():
     no = set(['no', 'n'])
 
     while True:
-        choice = raw_input('Correct? [Y/n]:').lower()
+        choice = input('Correct? [Y/n]:').lower()
         if choice in yes:
             return True
         elif choice in no:
             return False
         else:
-            print "Please respond with 'yes' or 'no'"
+            print("Please respond with 'yes' or 'no'")
 
 def changeFont(files):
     for file in files:
-        print "Begin processing:   " + file
+        print("Begin processing:   " + file)
 
         # Get data from xml file and close it
         with open(file, 'r+') as fileOpen:
@@ -67,7 +67,7 @@ def changeFont(files):
                     if 'mishmash' not in locals():
                         mishmash = False
                     if not mishmash:
-                        print "Name to regex:      " + name.string.strip(' \t\n\r')
+                        print("Name to regex:      " + name.string.strip(' \t\n\r'))
                         mishmash = decide()
                     # If there isn't a mishmash skip setting the name
                     if mishmash:
@@ -75,15 +75,15 @@ def changeFont(files):
                         if 'regex' not in locals():
                             regex = ""
                             while regex == "":
-                                regex = raw_input('Enter your regex:   ')
+                                regex = input('Enter your regex:   ')
                                 regex = regex or ""
                         if 'repeat' not in locals():
                             repeat = False
-                            while not isinstance( repeat, ( int, long ) ):
+                            while not isinstance( repeat, int ):
                                 repeat = input('Regex repetion [1]: ')
                                 repeat = repeat or 1
-                                if not isinstance( repeat, ( int, long ) ):
-                                    print "Please enter an integer"
+                                if not isinstance( repeat, int ):
+                                    print("Please enter an integer")
                         # Use entered regex and repetition to split mishmash
                         names = name.string.strip(' \t\n\r').split(regex,repeat)
 
@@ -100,13 +100,12 @@ def changeFont(files):
         if not names:
             raise Exception("No font names found!")
 
-        # Print the new names
-        print "New font family:    " + names[0]
-        print "New font variation: " + names[1]
+        print("New font family:    " + names[0])
+        print("New font variation: " + names[1])
 
         # Check if the main nameIDs are missing
-        for ID, platform in nameID.iteritems():
-            for ID, found in platform.iteritems():
+        for ID, platform in nameID.items():
+            for ID, found in platform.items():
                 if not found:
                     # Add missing namerecord
                     namerecord = soup.new_tag(
@@ -138,10 +137,10 @@ def changeFont(files):
         # Write the data to a file if names were found
         newFileName = names[0] + "-" + names[1] + ".ttx"
         data = soup.prettify("utf-8")
-        with open(file, 'w') as fileClose:
+        with open(file, 'wb') as fileClose:
             fileClose.write(data)
         os.renames(file, newFileName)
-        print "-----------------------------------"
+        print("-----------------------------------")
 
 def getFilesWith(extensions):
     files = []
@@ -167,10 +166,10 @@ if __name__ == "__main__":
     for file in getFilesWith([".ttf",".otf"]):
         try:
             ttx.main([file])
-            print "-----------------------------------"
+            print("-----------------------------------")
         except Exception as e:
-            print "Something went wrong converting ttf/otf -> ttx:"
-            print e
+            print("Something went wrong converting ttf/otf -> ttx:")
+            print(e)
             pass
 
     # Remove the old fonts that have been converted to xml
@@ -184,10 +183,10 @@ if __name__ == "__main__":
     for file in getFilesWith([".ttx"]):
         try:
             ttx.main([file])
-            print "-----------------------------------"
+            print("-----------------------------------")
         except Exception as e:
-            print "Something went wrong converting ttx -> ttf/otf:"
-            print e
+            print("Something went wrong converting ttx -> ttf/otf:")
+            print(e)
             pass
 
     # Remove the old xml that have been converted back to fonts
